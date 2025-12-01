@@ -1,11 +1,12 @@
 import React from 'react'
 import ProductList from '@/components/shared/product/product-list'
-import sampleData from '@/db/sample-data'
+import { getLatestProducts } from '@/lib/actions/product.actions'
 
-export default function HomePage() {
+export default async function HomePage() {
+  const data = await getLatestProducts();
   return (
     <div className='wrapper'>
-        <ProductList data={sampleData.products} title='Mi lista' limit={4}/>
+        <ProductList data={data} title='Últimos Productos' limit={4}/>
     </div>
   )
 }
