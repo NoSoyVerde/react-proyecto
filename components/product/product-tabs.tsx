@@ -1,11 +1,10 @@
-"use client";
-
 import React, { useState } from "react";
 import Image from "next/image";
 import ProductPrice from "@/components/shared/product/product-price";
 import { cn } from "@/lib/utils";
+import { Product } from "@/types/Product";
 
-export default function ProductTabs({ product }: { product: any }) {
+export default function ProductTabs({ product }: { product: Product }) {
   const [tab, setTab] = useState<"overview" | "details">("overview");
 
   return (

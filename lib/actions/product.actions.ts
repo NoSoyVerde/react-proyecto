@@ -9,7 +9,7 @@ export async function getLatestProducts(): Promise<Product[]> {
     orderBy: { createdAt: 'desc' },
   });
   const plain = convertToPlainObject(data);
-  return plain.map((product: any) => ({
+  return plain.map((product: typeof data[0]) => ({
     ...product,
     price: Number(product.price),
     rating: Number(product.rating),

@@ -10,5 +10,14 @@ export const auth = betterAuth({
     enabled: true,
     maxPasswordLength: 72,
   },
+  user: {
+    additionalFields: {
+      phone: {
+        type: "string",
+        required: false,
+        input: true,
+      },
+    },
+  },
   secret: process.env.BETTER_AUTH_SECRET!,
 });
