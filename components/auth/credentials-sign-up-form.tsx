@@ -61,8 +61,20 @@ export default function CredentialsSignUpForm() {
         onRequest: () => {
           setIsLoading(true);
         },
-        onSuccess: () => {
-          window.location.href = "/";
+        onSuccess: async () => {
+          try {
+            // send preferred communication method and optional phone to server
+            await fetch('/api/users/set-comms', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email, comms: communicationMethod === 'phone' ? 'phone' : 'mail', phone }),
+            });
+          } catch (err) {
+            // ignore - user created, preference not critical
+            console.error('set-comms error', err);
+          } finally {
+            window.location.href = "/profile";
+          }
         },
         onError: (ctx) => {
           setIsLoading(false);

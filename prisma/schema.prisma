@@ -35,6 +35,10 @@ model User {
   name          String
   email         String
   emailVerified Boolean   @default(false)
+  // preferred communication method: mail or phone
+  comms         CommMethod @default(MAIL)
+  // optional phone number provided at signup
+  phone         String?
   image         String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
@@ -43,6 +47,11 @@ model User {
 
   @@unique([email])
   @@map("user")
+}
+
+enum CommMethod {
+  MAIL
+  PHONE
 }
 
 model Session {

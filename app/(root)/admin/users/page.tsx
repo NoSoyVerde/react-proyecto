@@ -14,6 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getAllUsers, UserData } from "@/lib/actions/user.actions";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default async function AdminUsersPage() {
   const users = await getAllUsers();
@@ -39,8 +41,11 @@ export default async function AdminUsersPage() {
                 <TableHead>ID</TableHead>
                 <TableHead>Nombre</TableHead>
                 <TableHead>Email</TableHead>
+                <TableHead>Comms</TableHead>
+                <TableHead>Phone</TableHead>
                 <TableHead>Verificado</TableHead>
                 <TableHead>Fecha de Registro</TableHead>
+                <TableHead>Acciones</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -51,6 +56,8 @@ export default async function AdminUsersPage() {
                   </TableCell>
                   <TableCell>{user.name}</TableCell>
                   <TableCell>{user.email}</TableCell>
+                  <TableCell>{user.comms ?? "MAIL"}</TableCell>
+                  <TableCell>{user.phone ?? "-"}</TableCell>
                   <TableCell>
                     {user.emailVerified ? (
                       <span className="text-green-600">✓ Verificado</span>
@@ -60,6 +67,14 @@ export default async function AdminUsersPage() {
                   </TableCell>
                   <TableCell>
                     {new Date(user.createdAt).toLocaleDateString("es-ES")}
+                  </TableCell>
+                  <TableCell>
+                    <Link href={`/admin/users/${user.id}`} className="">
+                      {/* Use asChild Button pattern in case styles/slots are important */}
+                      <Button asChild size="sm" variant="outline">
+                        <span>Ver</span>
+                      </Button>
+                    </Link>
                   </TableCell>
                 </TableRow>
               ))}

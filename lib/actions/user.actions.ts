@@ -8,6 +8,8 @@ export type UserData = {
   name: string;
   email: string;
   emailVerified: boolean;
+  comms?: "MAIL" | "PHONE";
+  phone?: string | null;
   image: string | null;
   createdAt: Date;
   updatedAt: Date;

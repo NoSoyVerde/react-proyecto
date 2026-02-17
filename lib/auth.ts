@@ -22,6 +22,11 @@ export const auth = betterAuth({
         required: false,
         input: true,
       },
+      comms: {
+        type: "string",
+        required: false,
+        input: true,
+      },
     },
   },
   secret,
